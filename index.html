@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f4ef"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M2 25Q12 25 17 8Q24 30 37 31' stroke='%232c617d' stroke-width='3' fill='none'/%3E%3C/svg%3E"><title>LIVING ATLAS｜知序 AI 学院 Pro</title><link rel="stylesheet" href="./style.css"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'"></head>
+<body>
+<a href="#reading" class="skip">跳转到正文</a>
+<header class="masthead">
+ <a class="brand" href="./index.html" aria-label="知序 AI 学院 Pro 首页"><svg aria-hidden="true" viewBox="0 0 42 42" width="38" height="38"><path d="M4 26c8 0 10-19 18-19 7 0 7 27 16 27" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="7" r="3.5" fill="currentColor"/><circle cx="38" cy="34" r="3" fill="currentColor"/></svg><span>知序<span class="brand-sub">AI 学院 <b>Pro</b></span></span></a>
+ <span class="chapter-name">科学探究 / 初值敏感性</span>
+ <nav class="actions" aria-label="主导航"><button id="map-open" class="nav-button" type="button">知识关系</button><button id="evidence-open" class="nav-button" type="button">学习记录</button><button id="layout-switch" class="nav-button alt-only" type="button" aria-pressed="false">切换布局</button></nav>
+</header>
+<main id="reading" class="reading">
+ <article class="science-article" aria-labelledby="title">
+  <div class="book-meta"><span>非线性动力系统</span><span>交互科学文章</span></div>
+  <h1 id="title">微小的起点，<br><em>遥远的结果。</em></h1>
+  <p class="lead">当两条轨迹从几乎相同的位置出发，它们会一直相伴吗？在观察曲线之前，先用你自己的推理给出答案。</p>
+  <div class="principle">
+   <p>我们研究的是一个简单、但并不总是容易预测的迭代规则。每走一步，下一状态都由当前状态决定：</p>
+   <div class="formula" tabindex="0" aria-label="x 下标 n 加 1 等于 r 乘 x 下标 n 乘以括号 1 减 x 下标 n">
+    <span class="math">x<sub>n+1</sub> = <i>r</i> · x<sub>n</sub> (1 − x<sub>n</sub>)</span>
+    <button type="button" id="formula-help" class="inline-help">式中符号</button>
+   </div>
+   <p id="formula-note" class="formula-note" hidden>其中 <strong>r</strong> 是映射参数，<strong>x₀</strong> 是初始状态，<strong>n</strong> 是迭代步数；<strong>δ</strong> 是两次实验的初始状态差。它们不能混为一谈。</p>
+   <p>比较两条轨迹时，我们保持方程、参数 <i>r</i> 和迭代步数不变，只使第二条轨迹的初值变为 <span class="math-inline">x₀ + δ</span>。<strong>这是控制变量的科学问题，不是看谁的图形更漂亮。</strong></p>
+  </div>
+  <section class="teaching-step" id="pretest" aria-labelledby="pretest-title">
+   <div class="step-index">先检验已有想法</div>
+   <h2 id="pretest-title">阅读数据之前，你怎么判断？</h2>
+   <p class="secondary">请独立完成两道前测。选项初始均为空，评分解释将在后续学习阶段再回看。</p>
+   <div id="pretest-questions" class="question-list" aria-live="polite"><p>正在加载题库……</p></div>
+   <p id="pretest-message" class="message" role="status"></p>
+  </section>
+  <section id="forecast" class="teaching-step forecast" aria-labelledby="forecast-title" hidden>
+   <div class="step-index">给未来写一张封存的便条</div>
+   <h2 id="forecast-title">你预测曲线会如何演化？</h2>
+   <p class="secondary">只改变初值一个条件。实验计算开始后，本轮参数和预测将一起锁定，作为学习证据。</p>
+   <div class="parameters">
+    <label>映射参数 r <output id="r-out" for="r">3.90</output><input id="r" type="range" min="3.3" max="4" step="0.01" value="3.9"></label>
+    <label>初始状态 x₀ <output id="x0-out" for="x0">0.217</output><input id="x0" type="range" min="0.01" max="0.85" step="0.001" value="0.217"></label>
+    <label>扰动 log₁₀(δ) <output id="logDelta-out" for="logDelta">−10</output><input id="logDelta" type="range" min="-14" max="-3" step="1" value="-10"></label>
+    <label>迭代步数 <output id="steps-out" for="steps">150</output><input id="steps" type="range" min="20" max="300" step="10" value="150"></label>
+   </div>
+   <label class="answer-label" for="prediction">事前预测（独立完成）</label><textarea id="prediction" rows="3" placeholder="我认为……，因为……"></textarea>
+   <div class="row-actions"><button id="run" type="button" class="primary" disabled>封存预测，展开实验</button><span class="secondary">Pages 浏览器独立 Float64 科学计算（非 Node PFL 同一内核）</span></div>
+  </section>
+ </article>
+ <div class="margin-figure" aria-hidden="true"><div class="specimen"><div class="specimen-title">x₀　↔　x₀ + δ</div><svg viewBox="0 0 340 310" class="diagram" aria-hidden="true"><path d="M31 263V28 M31 263H314" fill="none" stroke="#75828a" stroke-width="1"/><path d="M31 252Q92 240 155 193 T307 53" fill="none" stroke="#3b7394" stroke-width="2.2" stroke-linecap="round"/><path d="M31 253Q92 241 155 195 T307 52" fill="none" stroke="#d1a46c" stroke-width="1.6" stroke-dasharray="4 6" opacity=".9"/><circle cx="31" cy="253" r="5" fill="#3b7394"/><circle cx="36" cy="253" r="3" fill="#d1a46c"/><path d="M41 245L114 208" stroke="#7b8584"/><text x="120" y="205" font-size="11" fill="#425967">δ</text></svg><p>模型结构示意（非实验计算结果）</p></div></div>
+</main>
+<section id="lab" class="lab" aria-labelledby="lab-title" hidden>
+ <div class="lab-header"><div><span class="lab-breadcrumb">阅读 / 实验</span><h2 id="lab-title">让方程显现轨迹</h2></div><button id="lab-close" type="button" class="lab-close">收起实验，返回文章</button></div>
+ <div class="lab-body"><div class="lab-stage"><div class="plot-head"><span id="plot-title">真实实验轨迹</span><span id="engine-label"></span></div><div id="chart-box" class="chart-box" aria-label="真实科学曲线，选择数据点可以查看坐标"></div><div class="chart-tools"><label for="data-point">选取迭代点 <input id="data-point" type="range" min="0" max="150" value="0"></label><output id="point-info">选择一个数据点，查看真实数值。</output></div></div>
+ <aside class="lab-inspection"><h3>本次测量</h3><dl id="metric-list"></dl><p id="lab-warning"></p><p id="lab-provenance"></p><div class="observation"><label for="reflection">观察与解释</label><textarea id="reflection" rows="4" placeholder="你观察到什么？它与事前预测的关系是什么？"></textarea><button id="mentor" type="button">向上下文导师请教</button><p id="mentor-status" class="subtle">默认规则引导，不向外部模型发送数据。</p><div id="mentor-output" aria-live="polite"></div></div></aside></div>
+ <div id="controlled" class="controlled" hidden><h3>设计第二次受控对照</h3><p>导师反馈之后才能提出新计划。由科学审批接口选择允许变动的条件；你要再次预测并亲自批准。</p><label>本轮想检验的问题 <input id="goal" type="text" value="如果增大初值扰动，会更早观察到轨迹分离吗？"></label><button id="plan-request" type="button">提出受控方案</button><div id="plan-details"></div><div id="approval-section" hidden><label for="approval-prediction">新条件下的独立预测（至少8字）</label><textarea id="approval-prediction" rows="2"></textarea><button id="approve" type="button" class="primary" disabled>确认并执行第二次实验</button></div></div>
+</section>
+<section id="transfer" class="reading-after" hidden aria-labelledby="transfer-title"><div class="step-index">带走一条推理</div><h2 id="transfer-title">换一个情境，还能判断吗？</h2><p>迁移题和前测不同。它仍由同一个题库独立判分。</p><div id="transfer-questions" class="question-list"></div></section>
+<section id="learning" class="learning-review" aria-labelledby="record-title"><h2 id="record-title">沿着证据继续学习</h2><p class="secondary">记录只保存在此浏览器。没有学习数据时显示“未评估”；不以模拟轨迹推导掌握率。</p><div id="evidence-summary"></div><div id="misconceptions"></div><div id="reviews"></div><button id="export" type="button">导出本机学习记录</button></section>
+<dialog id="knowledge-dialog" class="atlas-dialog"><div class="dialog-head"><div><h2>知识关系</h2><p>仅展示题库已有的 5 个真实概念。关系线标注为教学阅读路径，不代表数据库证明的先修依赖。</p></div><button type="button" id="map-close" aria-label="关闭知识关系">关闭</button></div><div class="map-controls"><button id="map-zoom-out" type="button" aria-label="缩小关系图">−</button><output id="map-zoom-level">100%</output><button id="map-zoom-in" type="button" aria-label="放大关系图">＋</button><button id="map-reset" type="button">重置视图</button></div><div class="map-viewport"><div id="concept-map" class="concept-map"></div></div></dialog>
+<footer>知序 AI 学院 Pro · 当前学习数据为设备本地记录，科学结果来自 Physics Frontier Lab，模型未配置时导师使用规则教学。<br><a href="https://ndshuge.github.io/zhixu-ai-academy/">原版入口</a></footer>
+<p id="global-status" role="status" class="global-status" aria-live="polite"></p>
+<script src="./pages-api-shim.js"></script><script type="module" src="./app.js"></script></body></html>
